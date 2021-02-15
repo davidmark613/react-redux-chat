@@ -5,3 +5,44 @@ body,
     background: #eee;
     padding: 1em;
 }
+
+/* SidePanel */
+.menu {
+    padding-bottom: 2em;
+}
+
+/* Messages */
+.messages {
+    height: 60vh;
+    overflow-y: scroll;
+}
+
+.messagesProgress {
+    height: 56vh;
+    overflow-y: scroll;
+}
+
+/* MessageForm */
+.messageForm {
+    position: fixed !important;
+    bottom: 1em;
+    margin-left: 320px !important;
+    left: 0;
+    right: 1em;
+    z-index: 200;
+}
+
+/* Message*/
+.messageSelf {
+    border-left: 2px solid orange;
+    padding-left: 8px;
+}
+
+.messageImage {
+    padding: 1em;
+}
+
+/* ProgressBar */
+.progressBar {
+    margin: 0.3em 0 0 0 !important;
+}
