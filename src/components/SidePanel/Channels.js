@@ -132,7 +132,7 @@ class Channels extends Component {
         this.props.setCurrentChannel(channel);
         this.props.setPrivateChannel(false);
         this.setState({channel});
-    }
+    };
 
     clearNotifications = () => {
         let index = this.state.notifications.findIndex(notification => notification.id ===
