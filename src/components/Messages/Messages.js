@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {setUserPosts} from '../../redux/actions/actions';
 import MessagesHeader from './MessagesHeader';
 import MessageForm from './MessageForm';
 import Message from './Message';
@@ -46,6 +49,7 @@ class Messages extends Component {
                 messagesLoading: false
             });
             this.countUniqueUsers(loadedMessages);
+            this.countUserPosts(loadedMessages);
         });
     };
 
@@ -112,12 +116,27 @@ class Messages extends Component {
         this.setState({numUniqueUsers});
     };
 
+    countUserPosts = messages => {
+        let userPosts = messages.reduce((acc, message) => {
+            if (message.user.name in acc) {
+                acc[message.user.name].count += 1;
+            } else {
+                acc[message.user.name] = {
+                    avatar: message.user.avatar,
+                    count: 1
+                }
+            }
+            return acc;
+        }, {});
+        this.props.setUserPosts(userPosts);
+    }
+
     handleSearchChange = event => {
         this.setState({
             searchTerm: event.target.value,
             searchLoading: true
         }, () => this.handleSearchMessages());
-    }
+    };
 
     handleSearchMessages = () => {
         const channelMessages = [...this.state.messages];
@@ -198,4 +217,8 @@ class Messages extends Component {
     }
 }
 
-export default Messages;
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({setUserPosts}, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(Messages);
